@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>...</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .hidden {
+      margin-top: 40px;
+      color: #000; /* чёрный на чёрном */
+      user-select: text;
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <div id="text"></div>
+
+    <div class="hidden">
+      мелатонин
+    </div>
+  </div>
+
+  <script>
+    const textElement = document.getElementById("text");
+    let typingInterval = null;
+
+    function typeText(element, text, speed = 60) {
+      if (typingInterval) {
+        clearInterval(typingInterval);
+        typingInterval = null;
+      }
+
+      element.textContent = "";
+      let i = 0;
+
+      typingInterval = setInterval(() => {
+        element.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(typingInterval);
+          typingInterval = null;
+        }
+      }, speed);
+    }
+
+    // небольшая пауза перед выводом
+    setTimeout(() => {
+      typeText(textElement, "здесь ничего нет", 80);
+    }, 700);
+  </script>
+</body>
+</html>
 
